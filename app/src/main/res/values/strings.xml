@@ -4,6 +4,7 @@
     <string name="title_activity_order">Order</string>
     <string name="favorite">Favorite</string>
     <string name="help">help</string>
+    <string name="customer_name">Your Name</string>
     <string name="menu_refresh">refresh</string>
     <string name="title_activity_testing">testing</string>
 

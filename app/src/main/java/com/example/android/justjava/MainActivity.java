@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.text.NumberFormat;
@@ -88,11 +89,13 @@ public class MainActivity extends AppCompatActivity {
     public void submitOrder(View view){
         CheckBox whipppedCream = (CheckBox) findViewById(R.id.whipped_cream);
         CheckBox chocolate = (CheckBox) findViewById(R.id.chocolate);
+        EditText name = (EditText) findViewById(R.id.customer_name);
+        String customerName = name.getText().toString();
         boolean hasWhippedCream = whipppedCream.isChecked();
         boolean hasChocolate = chocolate.isChecked();
         TextView summaryTextView = (TextView) findViewById(R.id.summary_text_view);
         totalPrice = price * quantity;
-        summaryTextView.setText(createOrderSummary(totalPrice, hasWhippedCream, hasChocolate));
+        summaryTextView.setText(createOrderSummary(totalPrice, hasWhippedCream, hasChocolate, customerName));
     }
 
     public void resubmitOrder(MenuItem item){
@@ -100,8 +103,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private String createOrderSummary(int price, boolean whippedCream, boolean chocolate){
-        String result = "Name: Kevin Ye";
+    private String createOrderSummary(int price, boolean whippedCream, boolean chocolate, String name){
+        String result = "Name: " + name;
         result += "\nQuantity: " + quantity;
         if (whippedCream){
             result += "\nWhipped Cream: True";

@@ -13,15 +13,22 @@
     tools:context="com.example.android.justjava.MainActivity"
     tools:showIn="@layout/activity_main">
     <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <EditText
+            android:id="@+id/customer_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/customer_name"
+            android:inputType="textCapWords"
+            android:layout_marginTop="16dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Toppings"/>
+            android:text="Toppings"
+            android:layout_marginTop="16dp"/>
 
             <CheckBox
                 android:id="@+id/whipped_cream"
@@ -86,13 +93,6 @@
 
 
         </LinearLayout>
-
-        <EditText
-            android:id="@+id/customer_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp" />
-
 
 
 
