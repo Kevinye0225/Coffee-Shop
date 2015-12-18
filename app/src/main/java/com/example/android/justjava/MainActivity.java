@@ -21,6 +21,9 @@ public class MainActivity extends AppCompatActivity {
     private int quantity = 0;
     private final int price = 5;
     private int totalPrice = 0;
+    private final static  int chocolateTopping = 2;
+    private final static int whippedCreamTopping = 1;
+
 
 
     @Override
@@ -95,8 +98,16 @@ public class MainActivity extends AppCompatActivity {
         boolean hasChocolate = chocolate.isChecked();
         TextView summaryTextView = (TextView) findViewById(R.id.summary_text_view);
         totalPrice = price * quantity;
+        if (hasChocolate) {
+            totalPrice += quantity * chocolateTopping;
+        }
+        if (hasWhippedCream){
+            totalPrice += quantity * whippedCreamTopping;
+        }
         summaryTextView.setText(createOrderSummary(totalPrice, hasWhippedCream, hasChocolate, customerName));
     }
+
+
 
     public void resubmitOrder(MenuItem item){
         Intent intent = new Intent(this, Order.class);
