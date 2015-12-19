@@ -1,6 +1,7 @@
 package com.example.android.justjava;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -76,25 +77,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void decrement(View view){
-        quantity--;
+        if (quantity > 1){
+            quantity--;
+        }
         totalPrice = price * quantity;
         display(quantity);
-//        displayPrice(totalPrice);
+
     }
 
     public void increment(View view){
-        quantity++;
+        if (quantity < 100){
+            quantity++;
+        }
         totalPrice = price * quantity;
         display(quantity);
 //        displayPrice(totalPrice);
     }
 
     public void submitOrder(View view){
-        CheckBox whipppedCream = (CheckBox) findViewById(R.id.whipped_cream);
+        CheckBox whippedCream = (CheckBox) findViewById(R.id.whipped_cream);
         CheckBox chocolate = (CheckBox) findViewById(R.id.chocolate);
         EditText name = (EditText) findViewById(R.id.customer_name);
         String customerName = name.getText().toString();
-        boolean hasWhippedCream = whipppedCream.isChecked();
+        String subject = "JustJava Order for Kevin Ye";
+        String [] addresses = {"yeyfly@hotmail.com"};
+        boolean hasWhippedCream = whippedCream.isChecked();
         boolean hasChocolate = chocolate.isChecked();
         TextView summaryTextView = (TextView) findViewById(R.id.summary_text_view);
         totalPrice = price * quantity;
@@ -104,8 +111,20 @@ public class MainActivity extends AppCompatActivity {
         if (hasWhippedCream){
             totalPrice += quantity * whippedCreamTopping;
         }
-        summaryTextView.setText(createOrderSummary(totalPrice, hasWhippedCream, hasChocolate, customerName));
+//        summaryTextView.setText(createOrderSummary(totalPrice, hasWhippedCream, hasChocolate, customerName));
+
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+        intent.putExtra(Intent.EXTRA_EMAIL, addresses);
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        intent.putExtra(Intent.EXTRA_TEXT, createOrderSummary(totalPrice, hasWhippedCream, hasChocolate, customerName));
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+
     }
+
+
 
 
 
